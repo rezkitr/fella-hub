@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login-form {
+  input {
+    @apply w-full focus:outline-none rounded-lg px-3 h-10;
+  }
+
+  button {
+    @apply bg-amber-200 rounded-lg font-semibold py-2;
+  }
+}
