@@ -1,33 +1,12 @@
-import { ENDPOINTS } from '@/utils/endpoints'
 import { IUser } from '@/utils/types'
-import { useEffect, useState } from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
 import { Avatar } from '../ui'
 
 interface IProps {
-  id: number
+  user: IUser
 }
 
-const UserCard = ({ id }: IProps) => {
-  const [user, setUser] = useState<IUser | null>(null)
-
-  useEffect(() => {
-    const getUser = async () => {
-      const res = await fetch(ENDPOINTS.user(id))
-      if (!res.ok) {
-        throw new Error('Failed to get user')
-      }
-
-      const data = await res.json()
-      setUser(data)
-    }
-    getUser()
-  }, [id])
-
-  if (!user) {
-    return false
-  }
-
+const UserCard = ({ user }: IProps) => {
   return (
     <div className="flex items-center gap-x-3">
       <Avatar fullName={user.name} />
