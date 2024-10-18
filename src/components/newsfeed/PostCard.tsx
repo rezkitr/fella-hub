@@ -1,4 +1,6 @@
-import { IPost } from '@/utils/types'
+import { ENDPOINTS } from '@/utils/endpoints'
+import { IPost, IUser } from '@/utils/types'
+import { useEffect, useState } from 'react'
 import { FaRegBookmark, FaRegHeart } from 'react-icons/fa'
 import { FaRegShareFromSquare } from 'react-icons/fa6'
 import PostItem from './PostItem'
@@ -9,9 +11,24 @@ interface IProps {
 }
 
 const PostCard = ({ post }: IProps) => {
-  return (
+  const [user, setUser] = useState<IUser | null>(null)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const res = await fetch(ENDPOINTS.user(post.userId))
+      if (!res.ok) {
+        throw new Error('Failed to get user')
+      }
+
+      const data = await res.json()
+      setUser(data)
+    }
+    getUser()
+  }, [post])
+
+  return user ? (
     <div className="bg-white rounded-lg px-6 py-4 md:w-[640px] mx-auto shadow-md space-y-3">
-      <UserCard id={post.userId} />
+      <UserCard user={user} />
       <div className="border-b" />
       <PostItem title={post.title} body={post.body} />
       <div className="border-b" />
@@ -21,6 +38,8 @@ const PostCard = ({ post }: IProps) => {
         <FaRegBookmark />
       </div>
     </div>
+  ) : (
+    <div className="md:w-[640px] h-56 mx-auto shadow-md bg-gray-300 rounded-lg animate-pulse" />
   )
 }
 
