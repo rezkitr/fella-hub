@@ -13,7 +13,7 @@ interface IFormValues {
   password: string
 }
 
-const LoginForm = () => {
+const SignInForm = () => {
   const router = useRouter()
 
   const {
@@ -87,4 +87,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default SignInForm

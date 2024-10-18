@@ -1,4 +1,6 @@
 import { IPost } from '@/utils/types'
+import { FaRegBookmark, FaRegHeart } from 'react-icons/fa'
+import { FaRegShareFromSquare } from 'react-icons/fa6'
 import PostItem from './PostItem'
 import UserCard from './UserCard'
 
@@ -12,6 +14,12 @@ const PostCard = ({ post }: IProps) => {
       <UserCard id={post.userId} />
       <div className="border-b" />
       <PostItem title={post.title} body={post.body} />
+      <div className="border-b" />
+      <div className="flex items-center gap-x-3 text-gray-500">
+        <FaRegHeart />
+        <FaRegShareFromSquare />
+        <FaRegBookmark />
+      </div>
     </div>
   )
 }
